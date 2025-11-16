@@ -43,6 +43,7 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>(initialCart);
   const [promo, setPromo] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<string>("credit-card");
 
   const subtotal = useMemo(
     () => cartItems.reduce((s, it) => s + it.price * it.qty, 0),
@@ -86,6 +87,7 @@ export default function CartPage() {
     <div className="min-h-screen bg-gray-50 py-8 px-6">
       <div className="max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
+          {/* Your Order */}
           <div className="bg-white rounded-xl shadow p-6">
             <h2 className="text-xl font-bold text-black">Your Order</h2>
 
@@ -148,41 +150,103 @@ export default function CartPage() {
             </div>
           </div>
 
+          {/* Delivery Address */}
           <div className="bg-white rounded-xl shadow p-6">
             <h3 className="font-semibold text-lg mb-4 text-black">Delivery Address</h3>
 
             <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">First Name</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="John" />
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="John"
+                  defaultValue=""
+                />
               </label>
 
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">Last Name</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="Doe" />
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="Doe"
+                  defaultValue=""
+                />
               </label>
 
               <label className="block md:col-span-2">
                 <span className="text-sm font-medium text-gray-700">Street Address</span>
                 <input
-                  className="mt-1 block w-full rounded-md border px-3 py-2"
-                  defaultValue="123 Main Street"
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="123 Road St"
+                  defaultValue=""
                 />
               </label>
 
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">City</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="Anytown" />
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="Atlantis"
+                  defaultValue=""
+                />
               </label>
 
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">Postal / ZIP</span>
-                <input className="mt-1 block w-full rounded-md border px-3 py-2" defaultValue="A1B 2C3" />
+                <input
+                  className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
+                  placeholder="A1A 1A1"
+                  defaultValue=""
+                />
               </label>
             </form>
           </div>
+
+          {/* Payment Method */}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h3 className="font-semibold text-lg mb-4 text-black">Payment Method</h3>
+
+            <div className="space-y-3">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="credit-card"
+                  checked={paymentMethod === "credit-card"}
+                  onChange={() => setPaymentMethod("credit-card")}
+                  className="h-4 w-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                />
+                <span className="text-black">Credit Card</span>
+              </label>
+
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="paypal"
+                  checked={paymentMethod === "paypal"}
+                  onChange={() => setPaymentMethod("paypal")}
+                  className="h-4 w-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                />
+                <span className="text-black">PayPal</span>
+              </label>
+
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="cash"
+                  checked={paymentMethod === "cash"}
+                  onChange={() => setPaymentMethod("cash")}
+                  className="h-4 w-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                />
+                <span className="text-black">Cash on Delivery</span>
+              </label>
+            </div>
+          </div>
         </div>
 
+        {/* Right sidebar: Order Summary */}
         <aside className="space-y-6">
           <div className="bg-white rounded-xl shadow p-6">
             <h3 className="font-bold text-lg text-black">Order Summary</h3>
@@ -222,12 +286,12 @@ export default function CartPage() {
                   value={promo}
                   onChange={(e) => setPromo(e.target.value)}
                   placeholder="Enter code"
-                  className="flex-1 rounded-md border px-3 py-2"
+                  className="flex-1 rounded-md border px-3 py-2 text-black"
                 />
                 <button
                   onClick={applyPromo}
                   type="button"
-                  className="px-4 py-2 rounded-md bg-white border hover:bg-gray-50"
+                  className="px-4 py-2 rounded-md bg-white border hover:bg-orange-500"
                 >
                   Apply
                 </button>
@@ -236,7 +300,7 @@ export default function CartPage() {
 
             <button
               className="mt-6 w-full rounded-md bg-orange-500 text-white py-3 font-semibold shadow hover:opacity-95"
-              onClick={() => alert("Place order clicked (demo)")}
+              onClick={() => alert(`Place order clicked (demo) - Payment: ${paymentMethod}`)}
             >
               Place Order
             </button>
@@ -247,7 +311,7 @@ export default function CartPage() {
           </div>
 
           <div className="bg-white rounded-xl shadow p-4">
-            <h4 className="font-semibold">Need help?</h4>
+            <h4 className="font-semibold text-black">Need help?</h4>
             <p className="text-sm text-gray-500 mt-2">Contact support or check FAQ.</p>
           </div>
         </aside>
