@@ -43,6 +43,7 @@ export default function CartPage() {
   const [cartItems, setCartItems] = useState<CartItem[]>(initialCart);
   const [promo, setPromo] = useState("");
   const [appliedPromo, setAppliedPromo] = useState<string | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<string>("credit-card");
 
   const subtotal = useMemo(
     () => cartItems.reduce((s, it) => s + it.price * it.qty, 0),
@@ -86,6 +87,7 @@ export default function CartPage() {
     <div className="min-h-screen bg-gray-50 py-8 px-6">
       <div className="max-w-[1100px] mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-2 space-y-6">
+          {/* Your Order */}
           <div className="bg-white rounded-xl shadow p-6">
             <h2 className="text-xl font-bold text-black">Your Order</h2>
 
@@ -148,13 +150,14 @@ export default function CartPage() {
             </div>
           </div>
 
+          {/* Delivery Address */}
           <div className="bg-white rounded-xl shadow p-6">
             <h3 className="font-semibold text-lg mb-4 text-black">Delivery Address</h3>
 
             <form className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <label className="block">
                 <span className="text-sm font-medium text-gray-700">First Name</span>
-               <input
+                <input
                   className="mt-1 block w-full rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-orange-500 px-3 py-2 text-black"
                   placeholder="John"
                   defaultValue=""
@@ -198,8 +201,52 @@ export default function CartPage() {
               </label>
             </form>
           </div>
+
+          {/* Payment Method */}
+          <div className="bg-white rounded-xl shadow p-6">
+            <h3 className="font-semibold text-lg mb-4 text-black">Payment Method</h3>
+
+            <div className="space-y-3">
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="credit-card"
+                  checked={paymentMethod === "credit-card"}
+                  onChange={() => setPaymentMethod("credit-card")}
+                  className="h-4 w-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                />
+                <span className="text-black">Credit Card</span>
+              </label>
+
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="paypal"
+                  checked={paymentMethod === "paypal"}
+                  onChange={() => setPaymentMethod("paypal")}
+                  className="h-4 w-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                />
+                <span className="text-black">PayPal</span>
+              </label>
+
+              <label className="flex items-center gap-3 cursor-pointer">
+                <input
+                  type="radio"
+                  name="payment"
+                  value="cash"
+                  checked={paymentMethod === "cash"}
+                  onChange={() => setPaymentMethod("cash")}
+                  className="h-4 w-4 text-orange-500 border-gray-300 focus:ring-orange-500"
+                />
+                <span className="text-black">Cash on Delivery</span>
+              </label>
+            </div>
+          </div>
         </div>
 
+        {/* Right sidebar: Order Summary */}
         <aside className="space-y-6">
           <div className="bg-white rounded-xl shadow p-6">
             <h3 className="font-bold text-lg text-black">Order Summary</h3>
@@ -253,7 +300,7 @@ export default function CartPage() {
 
             <button
               className="mt-6 w-full rounded-md bg-orange-500 text-white py-3 font-semibold shadow hover:opacity-95"
-              onClick={() => alert("Place order clicked (demo)")}
+              onClick={() => alert(`Place order clicked (demo) - Payment: ${paymentMethod}`)}
             >
               Place Order
             </button>
