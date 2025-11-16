@@ -5,59 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/app/components/Header';
 
-const chefs = [
-  {
-    id: 1,
-    name: 'Homestyle Ramen by Aiko',
-    prepTime: '30 – 40 mins',
-    deliveryFee: '$1.99 delivery fee',
-    rating: 9.7,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 2,
-    name: 'Vegan Bento by Mira',
-    prepTime: '35 – 45 mins',
-    deliveryFee: '$0 delivery fee',
-    rating: 9.3,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 3,
-    name: 'Sushi Rolls by Kenji',
-    prepTime: '40 – 55 mins',
-    deliveryFee: '$1.49 delivery fee',
-    rating: 9.5,
-    img: '/placeholder1.jpg'
-  },
-];
-
-const nationalFaves = [
-  {
-    id: 4,
-    name: 'Pizza by Sofia',
-    prepTime: '25 – 35 mins',
-    deliveryFee: '$0.99 delivery fee',
-    rating: 9.9,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 5,
-    name: 'Fried Chicken by Ray',
-    prepTime: '30 – 40 mins',
-    deliveryFee: '$0.79 delivery fee',
-    rating: 9.4,
-    img: '/placeholder1.jpg'
-  },
-  {
-    id: 6,
-    name: 'Classic Italian by Marco',
-    prepTime: '30 – 40 mins',
-    deliveryFee: '$0.79 delivery fee',
-    rating: 9.3,
-    img: '/placeholder1.jpg'
-  },
-];
+import { featuredChefs, nationalFaves } from '@/app/data/restaurants';
 
 export default function ChefsUpPage() {
   const [search, setSearch] = useState('');
