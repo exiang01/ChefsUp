@@ -80,12 +80,13 @@ export default function Home() {
                   className="w-full border-0 bg-transparent text-base text-zinc-900 placeholder:text-zinc-400 focus:outline-none"
                 />
               </label>
-              <button
-                type="button"
+              <Link
+                href="/main/home"
                 className="flex h-14 w-full items-center justify-center rounded-full bg-[#ff8c1a] text-white shadow-[0_12px_30px_rgba(255,140,26,0.35)] transition hover:bg-[#f17a00] sm:w-14"
               >
                 <ArrowIcon />
-              </button>
+                <span className="sr-only">Explore ChefsUp</span>
+              </Link>
             </form>
           </section>
         </main>
@@ -98,7 +99,7 @@ export default function Home() {
             money
           </p>
           <Link
-            href="/chef"
+            href="/chef/signup"
             className="mt-5 inline-flex items-center gap-2 text-base font-semibold"
           >
             Sign up for ChefsUp
