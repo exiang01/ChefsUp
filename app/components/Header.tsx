@@ -1,26 +1,27 @@
 'use client';
 
-import { ChangeEvent } from 'react';
+import Link from 'next/link';
 
 type HeaderProps = {
-  search: string;
-  onSearchChange: (value: string) => void;
+  logoHref: string;
 };
 
-export default function Header({ search, onSearchChange }: HeaderProps) {
-  const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
-    onSearchChange(event.target.value);
-  };
-
+export default function Header({ logoHref }: HeaderProps) {
   return (
     <header className="bg-white/95 shadow-sm ring-1 ring-gray-100">
       <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-6 py-5">
         <div className="flex w-full items-center justify-between">
-          <img
-            src="/images/logo.png"
-            alt="ChefsUp Logo"
-            className="h-12 w-auto object-contain"
-          />
+          <Link
+            href={logoHref}
+            aria-label="Navigate via ChefsUp logo"
+            className="inline-flex rounded-full transition hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+          >
+            <img
+              src="/images/logo.png"
+              alt="ChefsUp Logo"
+              className="h-12 w-auto object-contain"
+            />
+          </Link>
 
           <div className="flex flex-1 items-center justify-center gap-3">
             <div className="flex min-w-[340px] items-center rounded-full border border-gray-200 bg-gray-50 px-5 py-3 focus-within:border-orange-500">
@@ -41,11 +42,15 @@ export default function Header({ search, onSearchChange }: HeaderProps) {
               <input
                 aria-label="Search chefs"
                 type="text"
-                value={search}
-                onChange={handleSearch}
                 placeholder="Search restaurants, chefs, or cuisines"
-                className="ml-3 w-full bg-transparent text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
+                className="ml-3 flex-1 bg-transparent text-base text-gray-900 placeholder:text-gray-400 focus:outline-none"
               />
+              <Link
+                href="/main/home"
+                className="ml-4 rounded-full bg-orange-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-500"
+              >
+                Search
+              </Link>
             </div>
 
             <button

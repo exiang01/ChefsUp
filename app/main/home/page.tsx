@@ -1,6 +1,5 @@
 'use client';
 
-import { useMemo, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/app/components/Header';
@@ -8,43 +7,12 @@ import Header from '@/app/components/Header';
 import { featuredChefs, nationalFaves } from '@/app/data/restaurants';
 
 export default function ChefsUpPage() {
-  const [search, setSearch] = useState('');
-  const handleSearchChange = (value: string) => setSearch(value);
-  const searchTerm = search.trim().toLowerCase();
-
-  const filteredFeatured = useMemo(() => {
-    if (!searchTerm) return featuredChefs;
-    return featuredChefs.filter((chef) =>
-      [
-        chef.name,
-        chef.cuisine,
-        chef.chef,
-        chef.highlights.join(' '),
-      ]
-        .join(' ')
-        .toLowerCase()
-        .includes(searchTerm)
-    );
-  }, [searchTerm]);
-
-  const filteredNational = useMemo(() => {
-    if (!searchTerm) return nationalFaves;
-    return nationalFaves.filter((restaurant) =>
-      [
-        restaurant.name,
-        restaurant.cuisine,
-        restaurant.chef,
-        restaurant.highlights.join(' '),
-      ]
-        .join(' ')
-        .toLowerCase()
-        .includes(searchTerm)
-    );
-  }, [searchTerm]);
+  const filteredFeatured = featuredChefs;
+  const filteredNational = nationalFaves;
 
   return (
     <div className="w-full min-h-screen bg-gray-50">
-      <Header search={search} onSearchChange={handleSearchChange} />
+      <Header logoHref="/.." />
 
       <main className="mx-auto w-full max-w-6xl px-4 pb-16 pt-8 md:px-6">
         {/* Featured Section */}

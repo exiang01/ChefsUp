@@ -5,6 +5,7 @@ import {
   findRestaurantBySlug,
   restaurants,
 } from '@/app/data/restaurants';
+import Header from '@/app/components/Header';
 
 type RestaurantPageProps = {
   params: Promise<{
@@ -29,12 +30,7 @@ export default async function RestaurantPage({ params }: RestaurantPageProps) {
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="mx-auto w-full max-w-5xl px-4 pb-16 pt-6 md:px-6">
-        <Link
-          href="/main/home"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-gray-600 transition hover:text-orange-500"
-        >
-          <span aria-hidden>←</span> Back to all chefs
-        </Link>
+        <Header logoHref="./../home"/>
 
         <article className="mt-6 overflow-hidden rounded-3xl bg-white shadow-xl ring-1 ring-gray-100">
           <div className="relative h-64 w-full md:h-80">
